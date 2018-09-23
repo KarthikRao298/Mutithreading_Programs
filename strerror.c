@@ -12,7 +12,7 @@
  *                pthread_setspecific()
  *                pthread_join()
  *                pthread_create()
- * date: sept 21 2018
+ * date: Sept 21 2018
  */
 
 #define _GNU_SOURCE
@@ -27,15 +27,23 @@ static pthread_key_t strerrorKey;
 
 #define MAX_ERROR_LEN 256
 
-/* Free thread-specific data buffer using destructor */
+/*==============================================================================
+ *  destructor
+ *=============================================================================*/
 static void destructor(void *buf)
 {
+    /* Free thread-specific data buffer using destructor */
+
     free(buf);
 }
 
-/* One-time key creation function */
+/*==============================================================================
+ *  keyCreate
+ *=============================================================================*/
 static void  keyCreate(void)
 {
+    /* One-time key creation function */
+    
     int status;
     printf("Calling  pthread_key_create\n");
     status = pthread_key_create(&strerrorKey, destructor);
@@ -43,7 +51,9 @@ static void  keyCreate(void)
         printf("pthread_key_create error\n");
 }
 
-
+/*==============================================================================
+ *  strerror
+ *=============================================================================*/
 char * strerror(int err)
 {
     int status;
@@ -77,4 +87,3 @@ char * strerror(int err)
     }
     return buf;
 }
-

@@ -1,9 +1,11 @@
 /*
  * filename: test_strerror.c
+ *
  * description: This file tests the thread safe implementation of strerror() 
  * .            implemented in strerror.c
  * 
- * date: sept 21 2018
+ * date: Sept 21 2018
+ *
  * To compile:
  * gcc strerror.c test_strerror.c -lpthread -o test.exe
  *
@@ -24,6 +26,9 @@ typedef enum { FALSE, TRUE } Boolean;
 
 pthread_t t;
 
+/*==============================================================================
+ *  threadFunc
+ *=============================================================================*/
 static void * threadFunc(void *arg)
 {
 
@@ -42,6 +47,9 @@ static void * threadFunc(void *arg)
     return NULL;
 }
 
+/*==============================================================================
+ *  main
+ *=============================================================================*/
 int main(int argc, char *argv[])
 {
 
